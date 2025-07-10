@@ -1,0 +1,138 @@
+<div class="widgets">
+  <div class="widget" id="temp"></div>
+  <div class="widget" id="clock">--:--</div>
+  <div class="widget" id="date">
+    <div class="date-top">
+      <span class="weekday">--</span>
+      <span class="day-number">--</span>
+    </div>
+    <div class="month">-----</div>
+  </div>
+</div>
+
+<script>
+  const apiKey = '8206c0fe177369f39d633a984d536c7b';
+  const city = 'Monterrey';
+
+  function updateClock() {
+  const now = new Date();
+  const clock = document.getElementById('clock');
+  const date = document.getElementById('date');
+
+  if (clock) {
+    clock.innerText = now.toLocaleTimeString('es-MX', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  }
+
+  if (date) {
+    const weekdayEl = document.querySelector('#date .weekday') as HTMLElement;
+    const dayEl = document.querySelector('#date .day-number') as HTMLElement;
+    const monthEl = document.querySelector('#date .month') as HTMLElement;
+
+    if (weekdayEl) weekdayEl.innerText = now.toLocaleDateString('es-MX', { weekday: 'short' }).toUpperCase();
+    if (dayEl) dayEl.innerText = now.toLocaleDateString('es-MX', { day: '2-digit' });
+    if (monthEl) monthEl.innerText = now.toLocaleDateString('es-MX', { month: 'long' }).toUpperCase();
+  }
+}
+
+  async function fetchWeather() {
+  try {
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}&lang=es`);
+    const data = await res.json();
+    console.log('CLIMA:', data); // 👈 Agrega esto
+    const temp = data.main.temp.toFixed(1);
+    const desc = data.weather[0].description;
+const iconCode = data.weather[0].icon;
+const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+const tempEl = document.getElementById('temp');
+if (tempEl) {
+  tempEl.innerHTML = `
+    <img src="${iconUrl}" alt="${desc}" />
+    <span>${temp}°</span>
+  `;
+}
+  } catch (e) {
+    console.error('Error al obtener clima:', e); // 👈 Y este
+    const tempEl = document.getElementById('temp');
+    if (tempEl) tempEl.innerText = '🌡️ Error al obtener clima';
+  }
+}
+
+  setInterval(updateClock, 1000);
+  updateClock();
+  fetchWeather();
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;700&display=swap');
+
+  .widgets {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+  }
+
+  .widget {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 1rem;
+    font-family: "Roboto Condensed", sans-serif;
+    color: rgb(58, 58, 58);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  #temp {
+    font-size: 5rem;
+    gap: 1rem;
+  }
+
+  #temp img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+  }
+
+  #temp span {
+    font-size: 3rem;
+    font-weight: 100;
+  }
+
+  #clock {
+    font-size: 5rem;
+    font-weight: 100;
+  }
+
+  #date {
+    font-family: 'Roboto Condensed', sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #date .date-top {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 5rem;
+    font-weight: 100;
+  }
+
+  #date .month {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-top: 0.5rem;
+  }
+
+</style>

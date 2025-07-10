@@ -1,0 +1,67 @@
+/* Reset básico y configuración inicial */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 1920px;
+  height: 1080px;
+  font-family: sans-serif;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+
+/* Contenedor general */
+.container {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  background-color: rgb(255, 232, 202);
+}
+
+/* Media Horizontal */
+.media-horizontal {
+  position: absolute;
+  top: 36px;
+  left: 36px;
+  width: 1240px;
+  height: 697px;
+  border-radius: 80px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* Media Vertical */
+.media-vertical {
+  position: absolute;
+  top: 36px;
+  left: 1316px;
+  width: 543px;
+  height: 967px;
+  border-radius: 80px;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Widgets */
+.widgets {
+  position: absolute;
+  bottom: 72px;
+  left: 36px;
+  display: flex;
+  gap: 44px;
+}
+
+.widget {
+  width: 386px;
+  height: 231px;
+  background: #0d0d0e;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  font-size: 24px;
+}
