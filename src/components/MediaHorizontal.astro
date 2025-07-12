@@ -1,15 +1,39 @@
 ---
-const { src, alt = "" } = Astro.props;
+const { video, promo, onEnded } = Astro.props;
 ---
 
 <div class="media-horizontal">
-  <iframe
-    width="100%"
-    height="100%"
-    src={src}
-    title={alt}
-    frameborder="0"
-    allow="autoplay; fullscreen"
-    allowfullscreen
-  ></iframe>
+  <video
+    class="video"
+    src={video}
+    autoplay
+    muted
+    playsinline
+    onEnded={onEnded}
+  />
+  {promo && <img class="promo" src={promo} alt="Promoción horizontal" />}
 </div>
+
+<style>
+  .media-horizontal {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .promo {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    max-width: 40%;
+    max-height: 40%;
+    margin: 1rem;
+  }
+</style>

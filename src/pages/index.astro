@@ -11,8 +11,8 @@ try {
   const videoData = await resVideos.json();
   videos = videoData.data.map((v: any) => ({
     id: v.id,
-    archivo: v.Video?.url,
-    orientacion: v.orientacion
+    archivo: v.attributes?.Video?.data?.attributes?.url || v.Video?.url,
+    orientacion: v.attributes?.orientacion || v.orientacion
   }));
 
   const resPromos = await fetch('https://backend-strapi-dra-alejandra-production.up.railway.app/api/promocions?sort=id&populate=*');

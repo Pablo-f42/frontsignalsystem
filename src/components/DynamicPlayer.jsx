@@ -35,7 +35,7 @@ export default function DynamicPlayer({ videos, promociones }) {
                 key={index}
                 width="100%"
                 height="100%"
-                src={`https://backend-strapi-dra-alejandra-production.up.railway.app${currentVideo.archivo}`}
+                src={currentVideo.archivo}
                 autoPlay
                 muted
                 playsInline
@@ -50,7 +50,7 @@ export default function DynamicPlayer({ videos, promociones }) {
           </div>
           <div className="media-vertical">
             <img
-              src={`https://backend-strapi-dra-alejandra-production.up.railway.app${promoImage}`}
+              src={promoImage}
               alt="Promoción"
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
@@ -60,7 +60,7 @@ export default function DynamicPlayer({ videos, promociones }) {
         <>
           <div className="media-horizontal">
             <img
-              src={`https://backend-strapi-dra-alejandra-production.up.railway.app${promoImage}`}
+              src={promoImage}
               alt="Promoción"
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
@@ -70,7 +70,7 @@ export default function DynamicPlayer({ videos, promociones }) {
               key={index}
               width="100%"
               height="100%"
-              src={`https://backend-strapi-dra-alejandra-production.up.railway.app${currentVideo.archivo}`}
+              src={currentVideo.archivo}
               autoPlay
               muted
               playsInline
