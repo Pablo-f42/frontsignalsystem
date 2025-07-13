@@ -2,33 +2,9 @@
 import Layout from '../components/Layout.astro';
 import DynamicPlayer from '../components/DynamicPlayer.jsx';
 import Widgets from '../components/Widgets.astro';
-
-let videos = [];
-let promociones = [];
-
-try {
-  const resVideos = await fetch('https://backend-strapi-dra-alejandra-production.up.railway.app/api/vies?sort=id&populate=*');
-  const videoData = await resVideos.json();
-  videos = videoData.data.map((v: any) => ({
-    id: v.id,
-    archivo: v.attributes?.Video?.data?.attributes?.url || v.Video?.url,
-    orientacion: v.attributes?.orientacion || v.orientacion
-  }));
-
-  const resPromos = await fetch('https://backend-strapi-dra-alejandra-production.up.railway.app/api/promocions?sort=id&populate=*');
-  const promoData = await resPromos.json();
-  promociones = promoData.data.map((p: any) => ({
-    id: p.id,
-    nombre: p.Nombre,
-    horizontal: p.Horizontal?.url,
-    vertical: p.Vertical?.url
-  }));
-} catch (err) {
-  console.error('Error al obtener datos del backend:', err);
-}
 ---
 
 <Layout>
-  <DynamicPlayer videos={videos} promociones={promociones} client:only="react" />
+  <DynamicPlayer client:only="react" />
   <Widgets />
 </Layout>

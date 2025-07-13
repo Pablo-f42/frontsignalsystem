@@ -1,15 +1,16 @@
 ---
-const { src, alt = "" } = Astro.props;
+const { src } = Astro.props;
 ---
 
 <div class="media-vertical">
-  <iframe
+  <video
     width="100%"
     height="100%"
     src={src}
-    title={alt}
-    frameborder="0"
-    allow="autoplay; fullscreen"
-    allowfullscreen
-  ></iframe>
+    autoplay
+    muted
+    playsinline
+    preload="auto"
+    style="object-fit: cover;"
+  ></video>
 </div>
